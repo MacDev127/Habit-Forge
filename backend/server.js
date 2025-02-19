@@ -8,6 +8,10 @@ const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
 const session = require('express-session');
 
+console.log('GOOGLE_CLIENT_ID:', process.env.GOOGLE_CLIENT_ID);
+console.log('GOOGLE_CLIENT_SECRET:', process.env.GOOGLE_CLIENT_SECRET);
+console.log('OAUTH_CALLBACK_URL:', process.env.OAUTH_CALLBACK_URL);
+
 const passport = require('passport');
 require('./config/passport');
 const cookieParser = require('cookie-parser');
@@ -16,6 +20,7 @@ const cookieParser = require('cookie-parser');
 const userRoutes = require('./routes/userRoutes');
 const habitRoutes = require('./routes/habitRoutes');
 const progressRoutes = require('./routes/progressRoutes');
+const authRoutes = require('./routes/authRoutes'); // ✅ Add this line
 
 dotenv.config();
 
@@ -33,10 +38,11 @@ app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));
 app.use(cookieParser());
 
 app.use(
-  cookieSession({
-    name: 'session',
-    keys: [process.env.SESSION_SECRET],
-    maxAge: 24 * 60 * 60 * 1000, // 1 day
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false }, // Set `secure: true` in production with HTTPS
   })
 );
 

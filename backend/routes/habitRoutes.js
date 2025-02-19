@@ -4,8 +4,8 @@ const {
   getHabits,
   updateHabit,
   deleteHabit,
-} = require('../backend/controllers/habitController');
-const { authenticateUser } = require('../backend/middleware/authMiddleware');
+} = require('../controllers/habitController');
+const { authenticateUser } = require('../middleware/authMiddleware');
 
 const router = express.Router();
 

@@ -2,8 +2,8 @@ const express = require('express');
 const {
   markHabitProgress,
   getProgress,
-} = require('../backend/controllers/progressController');
-const { authenticateUser } = require('../backend/middleware/authMiddleware');
+} = require('../controllers/progressController');
+const { authenticateUser } = require('../middleware/authMiddleware');
 
 const router = express.Router();
 
