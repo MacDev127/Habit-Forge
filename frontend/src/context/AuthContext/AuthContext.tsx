@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   // Check if user is already logged in when the app loads
   useEffect(() => {
     axios
-      .get('http://localhost:5001/auth/user', { withCredentials: true })
+      .post('http://localhost:5001/auth/user', { withCredentials: true })
       .then((res) => setUser(res.data)) // Set user if logged in
       .catch(() => setUser(null)); // Clear user if not logged in
   }, []);

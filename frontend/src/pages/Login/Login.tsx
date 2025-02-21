@@ -22,14 +22,13 @@ const Login = () => {
           marginTop: '50px',
         }}
       >
-        <h1>login</h1>
-
         <LoginForm>
           <div className="btn-wrapper">
             <Button
               startIcon={<GoogleIcon />}
               size="small"
               variant="contained"
+              font-family="Poppins"
               color="primary"
               onClick={auth.loginWithGoogle}
               style={{ marginBottom: '10px', padding: '16px', width: '96%' }}

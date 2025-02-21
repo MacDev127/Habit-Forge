@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 form {
   height: 500px;
   max-width: 500px;
@@ -13,6 +15,7 @@ form {
     rgba(42, 51, 70, 0.04) 0px 6px 6px -3px,
     rgba(14, 63, 126, 0.04) 0px 12px 12px -6px,
     rgba(14, 63, 126, 0.04) 0px 24px 24px -12px;
+  font-family: 'Poppins', serif;
 }
 
 form input {
@@ -23,6 +26,7 @@ form input {
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
   background: #f5f5f7;
+  font-family: 'Poppins', serif;
 }
 
 form .form-btn {
@@ -34,6 +38,7 @@ form .form-btn {
   background-color: #00bfa5;
   border: none;
   font-size: 20px;
+  font-family: 'Poppins', serif;
 }
 
 form .form-btn:hover {
@@ -63,4 +68,18 @@ form .form-btn:hover {
   font-size: 14px;
   color: #666;
   font-weight: bold;
+  font-family: 'Poppins', serif;
+}
+
+.form-register__link {
+  color: #00bfa5;
+  font-size: 14px;
+  font-family: 'Poppins', serif;
+  width: 80%;
+  display: flex;
+  justify-content: flex-end;
+}
+.form-register__link a {
+  text-decoration: none;
+  margin-top: 10px;
 }
