@@ -1,60 +1,60 @@
+import { useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext/AuthContext';
 import './LoginForm.css';
-import { ReactNode } from 'react';
-import { useState } from 'react';
-import Axios from 'axios';
 
-interface LoginFormProps {
-  children: ReactNode;
-}
-const LoginForm = ({ children }: LoginFormProps) => {
-  const [userEmail, setUserEmail] = useState<string>('');
-  const [userPassword, setUserPassword] = useState<string>('');
-  const [userDetails, setUserDetails] = useState<string>('');
+const LoginForm = () => {
+  const auth = useContext(AuthContext);
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [error, setError] = useState<string>('');
 
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserEmail(e.target.value);
-  };
+  if (!auth) return null;
 
-  const handlePasswordChnage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserPassword(e.target.value);
-  };
-
-  const URL = 'http://localhost:5001/api/users/login';
-
-  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    try {
-      const response = await Axios.post(
-        URL,
-        { email: userEmail, password: userPassword },
-        { withCredentials: true }
-      );
-
-      console.log('✅ Login Successful:', response.data);
-      window.location.href = '/dashboard';
-    } catch (error) {
-      console.error('❌ Login Failed:');
-    }
+    setEmail('');
+    setPassword('');
+    const success = await auth.login(email, password);
+    if (!success) setError('Invalid email or password');
   };
-  return (
-    <form>
-      <input type="email" placeholder="Email" onChange={handleEmailChange} />
-      <input
-        type="password"
-        placeholder="Password"
-        onChange={handlePasswordChnage}
-      />
-      <button onClick={handleSubmit} className="form-btn" type="submit">
-        Sign In
-      </button>
-      <div className="divider-container">
-        <span className="divider-text">or</span>
-      </div>
 
-      {children}
-      <div className="form-register__link">
-        <a href="/register">No Account, Sign Up</a>
+  return (
+    <form className="login-form" onSubmit={handleLogin}>
+      <div className="input-group">
+        <label htmlFor="password">Email</label>
+
+        <input
+          id="email"
+          type="email"
+          placeholder="Enter your email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </div>
+      <div className="input-group">
+        <label htmlFor="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          placeholder="Enter your password"
+          required
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Link to="/forgot-password" className="form-password__link">
+          Forgot password?
+        </Link>
+      </div>
+      {error && <p className="error-message">{error}</p>}{' '}
+      <div className="input-group">
+        <button onClick={handleLogin} type="submit" className="login-btn">
+          Log In
+        </button>
+        <Link to="/register" className="form-register__link">
+          Don't have an account? Sign up now.
+        </Link>
       </div>
     </form>
   );

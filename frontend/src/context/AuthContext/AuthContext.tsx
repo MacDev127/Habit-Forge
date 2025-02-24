@@ -12,9 +12,8 @@ interface User {
 // Define the context type
 interface AuthContextType {
   user: User | null;
-  loginWithGoogle: () => void;
-  loginWithGitHub: () => void;
-  logout: () => void;
+  login: (email: string, password: string) => Promise<boolean>;
+  logout: () => Promise<void>;
 }
 
 // Create authentication context
@@ -24,40 +23,51 @@ export const AuthContext = createContext<AuthContextType | undefined>(
 
 // AuthProvider component that wraps the app
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null); // Stores authenticated user data
+  const [user, setUser] = useState<User | null>(null);
 
-  // Check if user is already logged in when the app loads
+  // ✅ Check if user is already logged in when the app loads
   useEffect(() => {
     axios
-      .post('http://localhost:5001/auth/user', { withCredentials: true })
-      .then((res) => setUser(res.data)) // Set user if logged in
-      .catch(() => setUser(null)); // Clear user if not logged in
+      .get('http://localhost:5001/api/users/me', { withCredentials: true })
+      .then((res) => setUser(res.data)) // ✅ Set user if logged in
+      .catch(() => setUser(null)); // ❌ Clear user if not logged in
   }, []);
 
-  // Redirect to Google OAuth login
-  const loginWithGoogle = () => {
-    window.location.href = 'http://localhost:5001/auth/google';
+  // ✅ Login function
+  const login = async (email: string, password: string): Promise<boolean> => {
+    try {
+      const response = await axios.post(
+        'http://localhost:5001/api/users/login',
+        { email, password },
+        { withCredentials: true } // ✅ Allows sending cookies for session
+      );
+
+      setUser(response.data.user); // ✅ Store user info in context
+      window.location.href = '/dashboard'; // ✅ Redirect user to dashboard
+      return true;
+    } catch (error) {
+      console.error('❌ Login Failed:', error);
+      return false;
+    }
   };
 
-  // Redirect to GitHub OAuth login
-  const loginWithGitHub = () => {
-    window.location.href = 'http://localhost:5001/auth/github';
-  };
-
-  // Logout user and clear session
-  const logout = () => {
-    axios
-      .get('http://localhost:5001/auth/logout', { withCredentials: true })
-      .then(() => {
-        setUser(null); // Clear user state after logout
-      });
+  // ✅ Logout function
+  const logout = async () => {
+    try {
+      await axios.post(
+        'http://localhost:5001/api/users/logout',
+        {},
+        { withCredentials: true }
+      );
+      setUser(null); // ✅ Clear user state after logout
+      window.location.href = '/login'; // ✅ Redirect to login page
+    } catch (error) {
+      console.error('❌ Logout Failed:', error);
+    }
   };
 
   return (
-    // Provide authentication state and functions to children components
-    <AuthContext.Provider
-      value={{ user, loginWithGoogle, loginWithGitHub, logout }}
-    >
+    <AuthContext.Provider value={{ user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
