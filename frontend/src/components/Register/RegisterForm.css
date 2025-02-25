@@ -8,12 +8,6 @@ form {
   align-items: center;
   flex-direction: column;
   padding: 40px 20px;
-  /* box-shadow: rgba(14, 63, 126, 0.04) 0px 0px 0px 1px,
-    rgba(42, 51, 69, 0.04) 0px 1px 1px -0.5px,
-    rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px,
-    rgba(42, 51, 70, 0.04) 0px 6px 6px -3px,
-    rgba(14, 63, 126, 0.04) 0px 12px 12px -6px,
-    rgba(14, 63, 126, 0.04) 0px 24px 24px -12px; */
   font-family: 'Poppins', serif;
 }
 
@@ -40,16 +34,64 @@ label {
   padding: 4px 0;
 }
 
-form .input-group {
-  width: 100%; /* ✅ Use full width to maintain consistency */
+.checkbox-label {
+  margin-top: 5px;
+  font-size: 15px;
+}
+
+.register-input__checkbox input[type='checkbox'] {
+  appearance: none; /* Remove default styling */
+  width: 14px !important;
+  padding: 10px;
+  height: 14px !important;
+  border-radius: 4px;
+  background-color: #00d9ff; /* Default checked background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.3s, border 0.3s;
+}
+.register-input__checkbox input[type='checkbox']:focus {
+  outline: none;
+  border: none;
+}
+
+.register-input__checkbox input[type='checkbox']::before {
+  content: '✔';
+  font-size: 16px;
+  color: black;
+  font-weight: bold;
+  display: none;
+}
+
+.register-input__checkbox input[type='checkbox']:checked::before {
+  display: block; /* Show checkmark when checked */
+}
+
+.register-input__checkbox label {
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+}
+
+form .register-input__group {
+  width: 100%;
   max-width: 400px;
   display: flex;
   justify-content: center;
   flex-direction: column;
 }
 
-.login-btn {
-  width: 108%;
+.register-input__checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.register-btn {
+  width: 100%;
   border-radius: 5px;
   padding: 12px;
   margin: 30px 0px 10px 0px;
@@ -60,16 +102,16 @@ form .input-group {
   font-family: 'Poppins', serif;
 }
 
-form .login-btn:hover {
+form .register-btn:hover {
   background-color: #71e2ff;
   transition: ease 0.3s;
 }
 
-.login-btn__container {
+.register-btn__container {
   display: flex;
   justify-content: left;
   align-items: center;
-  width: 400px;
+  width: 500px;
   max-width: 400px;
 }
 
@@ -86,12 +128,19 @@ form .login-btn:hover {
   color: #71e2ff;
 }
 
-.login-form__link {
-  display: flex;
+.form-register__link-wrapper {
+  width: 80%;
   gap: 6px;
-  justify-content: flex-start;
-  align-items: center;
-}
-.login-form__link p {
+  display: flex;
   font-size: 14px;
+  align-items: center;
+  justify-content: flex-start;
+}
+.form-register__link {
+  font-size: 14px;
+  color: #71e2ff;
+}
+.form-password__link:hover,
+.form-register__link:hover {
+  color: #5dd8f6;
 }

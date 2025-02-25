@@ -52,9 +52,12 @@ const LoginForm = () => {
         <button onClick={handleLogin} type="submit" className="login-btn">
           Log In
         </button>
-        <Link to="/register" className="form-register__link">
-          Don't have an account? Sign up now.
-        </Link>
+        <div className="login-form__link">
+          <p> Don't have an account?</p>
+          <Link to="/register" className="form-register__link">
+            Sign up now.
+          </Link>
+        </div>
       </div>
     </form>
   );
