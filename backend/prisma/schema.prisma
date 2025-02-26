@@ -7,6 +7,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  USER
+  ADMIN
+}
+
 model User {
   id        String   @id @default(uuid())
   username  String
@@ -16,6 +21,7 @@ model User {
   habits    Habit[]
   areas     Area[]
   avatar    String?
+  role      Role     @default(USER) // Enum ensures only valid roles
 }
 
 model Area {
