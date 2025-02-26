@@ -132,9 +132,9 @@ form .register-btn:hover {
 .form-register__link-wrapper {
   width: 80%;
   gap: 6px;
+  margin-top: 10px;
   display: flex;
   font-size: 14px;
-  align-items: center;
   justify-content: flex-start;
 }
 .form-register__link {

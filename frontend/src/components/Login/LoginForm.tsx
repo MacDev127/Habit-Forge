@@ -47,9 +47,9 @@ const LoginForm = () => {
           Forgot password?
         </Link>
       </div>
-      {error && <p className="error-message">{error}</p>}{' '}
+      {error && <p className="error-message">{error}</p>}
       <div className="input-group">
-        <button onClick={handleLogin} type="submit" className="login-btn">
+        <button type="submit" className="login-btn">
           Log In
         </button>
         <div className="login-form__link">

@@ -161,13 +161,12 @@ const RegisterForm = () => {
         <button onClick={handleRegister} className="register-btn">
           Create Account
         </button>
-      </div>
-
-      <div className="form-register__link-wrapper">
-        <p>Already have an account?</p>
-        <Link to="/login" className="form-register__link">
-          Sign In
-        </Link>
+        <div className="form-register__link-wrapper">
+          <p>Already have an account?</p>
+          <Link to="/login" className="form-register__link">
+            Sign In
+          </Link>
+        </div>
       </div>
     </form>
   );
