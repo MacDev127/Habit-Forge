@@ -23,7 +23,7 @@ form input {
   font-family: 'Poppins', serif;
 }
 input::placeholder {
-  color: #f9fafb;
+  color: #a1a1aa;
 }
 input:focus {
   outline: 1px solid #71e2ff; /* Change blue to orange */
@@ -67,12 +67,12 @@ label {
 }
 
 .register-input__checkbox input[type='checkbox']:checked::before {
-  display: block; /* Show checkmark when checked */
+  display: block;
 }
 
 .register-input__checkbox label {
-  font-size: 16px;
-  color: white;
+  font-size: 14px;
+  color: #a1a1aa;
   cursor: pointer;
 }
 
@@ -87,6 +87,7 @@ form .register-input__group {
 .register-input__checkbox {
   display: flex;
   align-items: flex-start;
+  padding-top: 10px;
   gap: 8px;
 }
 
@@ -94,7 +95,7 @@ form .register-input__group {
   width: 100%;
   border-radius: 5px;
   padding: 12px;
-  margin: 30px 0px 10px 0px;
+  margin: 30px 0px 0px 0px;
   cursor: pointer;
   background-color: #00d9ff;
   border: none;
@@ -143,4 +144,17 @@ form .register-btn:hover {
 .form-password__link:hover,
 .form-register__link:hover {
   color: #5dd8f6;
+}
+
+.input-error {
+  border: 2px solid #ff5a50;
+}
+
+form .register-error {
+  color: #ff5a50;
+  margin-top: 10px;
+  font-size: 14px;
+  display: flex;
+  align-items: baseline;
+  text-align: center;
 }

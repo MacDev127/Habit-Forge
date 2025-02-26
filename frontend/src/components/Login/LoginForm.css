@@ -8,12 +8,6 @@ form {
   align-items: center;
   flex-direction: column;
   padding: 40px 20px;
-  /* box-shadow: rgba(14, 63, 126, 0.04) 0px 0px 0px 1px,
-    rgba(42, 51, 69, 0.04) 0px 1px 1px -0.5px,
-    rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px,
-    rgba(42, 51, 70, 0.04) 0px 6px 6px -3px,
-    rgba(14, 63, 126, 0.04) 0px 12px 12px -6px,
-    rgba(14, 63, 126, 0.04) 0px 24px 24px -12px; */
   font-family: 'Poppins', serif;
 }
 
@@ -32,7 +26,7 @@ input::placeholder {
   color: #f9fafb;
 }
 input:focus {
-  outline: 1px solid #71e2ff; /* Change blue to orange */
+  outline: 1px solid #71e2ff;
   border: 1px solid #71e2ff;
 }
 
@@ -41,8 +35,9 @@ label {
 }
 
 form .input-group {
-  width: 100%; /* ✅ Use full width to maintain consistency */
+  width: 100%;
   max-width: 400px;
+  padding: 8px 0px 0px 0px;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -52,7 +47,7 @@ form .input-group {
   width: 108%;
   border-radius: 5px;
   padding: 12px;
-  margin: 30px 0px 10px 0px;
+  margin: 30px 0px 0px 0px;
   cursor: pointer;
   background-color: #00d9ff;
   border: none;

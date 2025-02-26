@@ -64,6 +64,31 @@ const loginUser = async (req, res) => {
   }
 };
 
+// ✅ Check if email exists
+const checkEmailExists = async (req, res) => {
+  const { email } = req.body; // Get email from request
+
+  if (!email) {
+    return res.status(400).json({ message: 'Email is required' });
+  }
+
+  try {
+    const existingUser = await prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (existingUser) {
+      return res.status(409).json({ message: 'Email already in use' });
+    }
+
+    res.json({ message: 'Email is available' });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: 'Error checking email', error: error.message });
+  }
+};
+
 // ✅ Get Authenticated User (`/me` Route)
 const getUser = async (req, res) => {
   try {
@@ -92,4 +117,10 @@ const logoutUser = (req, res) => {
   res.json({ message: 'Logged out successfully' });
 };
 
-module.exports = { registerUser, loginUser, getUser, logoutUser };
+module.exports = {
+  registerUser,
+  loginUser,
+  getUser,
+  logoutUser,
+  checkEmailExists,
+};
