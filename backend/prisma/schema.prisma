@@ -22,6 +22,8 @@ model User {
   areas     Area[]
   avatar    String?
   role      Role     @default(USER) // Enum ensures only valid roles
+  resetToken String? 
+  resetTokenExpiry DateTime?  
 }
 
 model Area {

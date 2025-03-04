@@ -2,34 +2,40 @@ const express = require('express');
 const {
   registerUser,
   loginUser,
+  getUser,
+  logoutUser,
   checkEmailExists,
+  requestPasswordReset,
+  resetPassword,
 } = require('../controllers/userController');
 const { authenticateUser } = require('../middleware/authMiddleware');
 
 const router = express.Router();
 
+// Register
 router.post('/register', registerUser);
+
+//  Login
 router.post('/login', loginUser);
-router.post('/check-email', checkEmailExists); // ✅ New Route to Check Email
 
-router.post('/logout', (req, res) => {
-  res.clearCookie('token'); // ✅ Clear token on logout
-  res.json({ message: 'Logged out successfully' });
-});
+// Get Current User (`/me`)
+router.get('/me', authenticateUser, getUser);
 
-// ✅ Get Current User
-router.get('/me', authenticateUser, async (req, res) => {
-  try {
-    res.json({
-      id: req.user.userId, // ✅ Extracted from JWT
-      username: req.user.username,
-      email: req.user.email,
-    });
-  } catch (error) {
-    res
-      .status(500)
-      .json({ message: 'Error fetching user', error: error.message });
-  }
-});
+// Logout
+router.post('/logout', logoutUser);
+
+// Check if Email Exists
+router.post('/check-email', checkEmailExists);
+
+// Password Reset
+router.post(
+  '/forgot-password',
+  (req, res, next) => {
+    console.log('🚀 forgot-password route HIT');
+    next();
+  },
+  requestPasswordReset
+);
+router.post('/reset-password', resetPassword);
 
 module.exports = router;
