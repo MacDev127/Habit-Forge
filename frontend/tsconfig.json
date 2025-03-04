@@ -23,6 +23,7 @@
     "../App.test.tsx",
     "../reportWebVitals.ts",
     "src/app/setupTests.ts",
-    "../react-app-env.d.ts"
+    "../react-app-env.d.ts",
+    "craco.config.js"
   ]
 }

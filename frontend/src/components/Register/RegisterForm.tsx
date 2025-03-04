@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './RegisterForm.css';
-import axios, { AxiosError } from 'axios'; // ✅ Import AxiosError
+import axios, { AxiosError } from 'axios';
 const RegisterForm = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
